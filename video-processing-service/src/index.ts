@@ -3,7 +3,7 @@ import ffmpeg from 'fluent-ffmpeg';
 
 
 const app = express();
-
+app.use(express.json());
 app.post('/process-video', (req, res) => {
   //we need a body to pass a post request
   //get the path of the input video file from the req body
@@ -19,7 +19,7 @@ app.post('/process-video', (req, res) => {
     .on("end",()=>{
       res.status(200).send("Video Processing is completed");
     })
-    .on("error",(err)=>{
+    .on("error",(err:any)=>{
       console.log(`An error occured: ${err.message}`);
       res.status(500).send(`Internal server error: ${err.message}`);
     })
@@ -30,3 +30,6 @@ app.listen(port, () => {
   console.log(
     `video processing service running at http://localhost:${port}`);
 });
+app.get("/",(req,res)=>{
+  res.send("Hello");
+})
