@@ -3,7 +3,6 @@ import ffmpeg from 'fluent-ffmpeg';
 
 
 const app = express();
-const port = 3000;
 
 app.post('/process-video', (req, res) => {
   //we need a body to pass a post request
@@ -18,7 +17,7 @@ app.post('/process-video', (req, res) => {
   ffmpeg(inputFilePath)
     .outputOptions("-vf","scale=-1:360") // converting to 360p(found from ffmpeg document)
     .on("end",()=>{
-
+      res.status(200).send("Video Processing is completed");
     })
     .on("error",(err)=>{
       console.log(`An error occured: ${err.message}`);
@@ -26,7 +25,7 @@ app.post('/process-video', (req, res) => {
     })
     .save(outputFilePath);
 });
-
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(
     `video processing service running at http://localhost:${port}`);
