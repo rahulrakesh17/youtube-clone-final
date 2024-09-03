@@ -6,7 +6,7 @@ import Watch from "./watch/page";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CloneTube",
+  title: "YouTube",
   description: "Clone of YouTube as a personal project, no copyright intended",
 };
 
